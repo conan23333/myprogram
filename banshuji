@@ -1,0 +1,55 @@
+/**
+ * 
+ */
+/**
+ * @author 柠檬怪啦
+ *
+ */
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
+
+
+
+public class banshuji {
+
+	/**
+	 * @param args
+	 * @throws IOException 
+	 */
+	public static void main(String[] args) throws IOException {
+		// TODO Auto-generated method stub
+		File infile=new File("input.txt");
+		Scanner input=new Scanner(infile);
+		String i=input.next();
+		input.close();
+		int number=Integer.parseInt(i);
+		System.out.println(acg(number));
+		File outfile=new File("output.txt");
+		FileWriter fw=null;
+		BufferedWriter bw=null;
+		String num="本次测试的数字:"+number+"\t本次实验结果:"+acg(number)+"\t\t";
+		try {
+			if(!outfile.exists())
+			outfile.createNewFile();
+			fw=new FileWriter(outfile.getAbsoluteFile(),true);
+			bw=new BufferedWriter(fw);
+			bw.write(num);
+			bw.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public static int acg(int n){
+		int count=1;
+		if(n>1){
+			for(int i=1;i<=n/2;i++){
+				count+=acg(i);
+			}
+		}
+		return count;
+	}
+}
